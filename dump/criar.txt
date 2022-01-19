@@ -1,0 +1,89 @@
+
+Criar um banco de dados chamado appvendas e rodar o script abaixo.
+
+CREATE TABLE public.tab_pedido
+(
+    ped_id integer NOT NULL DEFAULT nextval('tab_pedido_ped_id_seq'::regclass),
+    ped_datacadastro date,
+    ped_horacadastro text COLLATE pg_catalog."default",
+    ip_lancamento text COLLATE pg_catalog."default",
+    user_codigo integer,
+    ped_cancelado text COLLATE pg_catalog."default",
+    CONSTRAINT tab_pedido_pkey PRIMARY KEY (ped_id)
+)
+
+
+CREATE TABLE public.tab_pedido_item
+(
+    peditem_id integer NOT NULL DEFAULT nextval('tab_pedido_item_peditem_id_seq'::regclass),
+    pedido_id integer NOT NULL,
+    produto_id integer NOT NULL,
+    peditem_qtdevendida double precision,
+    peditem_precounitario double precision,
+    peditem_aliquotaicms double precision,
+    peditem_aliquotaipi double precision,
+    peditem_datacadastro date,
+    peditem_horacadastro text COLLATE pg_catalog."default",
+    ip_lancamento text COLLATE pg_catalog."default",
+    user_codigo integer,
+    peditem_precototal double precision,
+    peditem_precoicms double precision,
+    peditem_precoipi double precision,
+    CONSTRAINT tab_pedido_item_pkey PRIMARY KEY (peditem_id, pedido_id, produto_id)
+)
+
+
+CREATE TABLE public.tab_produtos
+(
+    pro_id integer NOT NULL DEFAULT nextval('tab_produtos_pro_id_seq'::regclass),
+    pro_descricao text COLLATE pg_catalog."default" NOT NULL,
+    pro_precovenda double precision NOT NULL,
+    categoria_codigo integer NOT NULL,
+    pro_ativo text COLLATE pg_catalog."default",
+    pro_datacadastro date,
+    pro_horacadastro text COLLATE pg_catalog."default",
+    ip_lancamento text COLLATE pg_catalog."default",
+    user_codigo integer,
+    CONSTRAINT tab_produtos_pkey PRIMARY KEY (pro_id)
+)
+
+
+CREATE TABLE public.tab_produtos_tipo
+(
+    cat_id integer NOT NULL DEFAULT nextval('produtos_tipo_id_seq'::regclass),
+    cat_descricao text COLLATE pg_catalog."default" NOT NULL,
+    cat_aliquotaicms double precision,
+    cat_aliquotaipi double precision,
+    cat_ativo text COLLATE pg_catalog."default",
+    cat_datacadastro date,
+    cat_horacadastro text COLLATE pg_catalog."default",
+    ip_lancamento text COLLATE pg_catalog."default",
+    user_codigo integer,
+    CONSTRAINT produtos_tipo_pkey PRIMARY KEY (cat_id)
+)
+
+
+CREATE TABLE public.tab_usuarios
+(
+    user_datacadastro date,
+    user_id integer NOT NULL DEFAULT nextval('tab_usuarios_user_id_seq'::regclass),
+    user_imagemperfil text COLLATE pg_catalog."default",
+    user_senha text COLLATE pg_catalog."default" NOT NULL,
+    user_email text COLLATE pg_catalog."default" NOT NULL,
+    user_horacadastro text COLLATE pg_catalog."default",
+    ip_lancamento text COLLATE pg_catalog."default",
+    user_ultimoacesso date,
+    CONSTRAINT tab_usuarios_pkey PRIMARY KEY (user_id)
+)
+
+
+CREATE TABLE public.tab_usuarios_token
+(
+    token_id integer NOT NULL DEFAULT nextval('tab_usuarios_token_token_id_seq'::regclass),
+    usuario_id integer NOT NULL,
+    token_hash text COLLATE pg_catalog."default",
+    token_usado text COLLATE pg_catalog."default",
+    token_expira_em date,
+    ip_lancamento text COLLATE pg_catalog."default",
+    CONSTRAINT tab_usuarios_token_pkey PRIMARY KEY (token_id)
+)
