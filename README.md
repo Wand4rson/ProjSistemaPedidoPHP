@@ -3,7 +3,8 @@ Sistemas de emissão de pedidos, utilizando PHP e PostgreSQL
 
 
 ## Configurado a instalação do PostgreSQL
-Caso não esteja ativo, ativar a extensão pdo-pgsql no php.ini
+- Caso não esteja ativo, ativar a extensão pdo-pgsql no php.ini
+- Foi utilizado o servidor xampp.
 
 ## Como usar
 - Restaurar o backup
