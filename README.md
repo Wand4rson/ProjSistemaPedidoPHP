@@ -1,5 +1,5 @@
 ### Desafio Técnico ###
-Sistemas de emissão de pedidos, utilizando PHP e PostgreSQL
+Sistema de emissão de pedidos, utilizando PHP e PostgreSQL
 
 
 ## Configurado a instalação do PostgreSQL
